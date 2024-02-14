@@ -16,10 +16,10 @@ function createThoughts(users) {
       reactions: [],
     };
 
-   
+    // Add 3 reactions to each thought
     for (let i = 1; i <= 3; i++) {
       thought.reactions.push({
-        reactionBody:` Reaction ${i} by ${user.username}`,
+        reactionBody: `Reaction ${i} by ${user.username}`,
         username: user.username,
       });
     }
