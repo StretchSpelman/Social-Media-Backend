@@ -25,6 +25,8 @@ To get started with the Social Media Backend, follow these steps:
 
 The API uses standard HTTP methods for CRUD operations. Here are some examples of how to use the API with Insomnia:
 
+## Video link:[Video](https://drive.google.com/file/d/1qzXmb1p_q2k_ghAzbeN85qhxbakIlKp7/view)
+
 ### Users
 
 - **GET** `/api/users`: Retrieve a list of all users.

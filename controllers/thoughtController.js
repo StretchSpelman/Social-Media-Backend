@@ -23,10 +23,11 @@ module.exports = {
     }
   },
   async createThought(req, res) {
+    console.log(req.body)
     try {
       const dbThoughtData = await Thought.create(req.body);
       const dbUserData = await User.findOneAndUpdate(
-        { _id: req.body.username },
+        { _id: req.body.userId },
         { $addToSet: { thoughts: dbThoughtData._id } },
         { new: true }
       );
@@ -83,18 +84,19 @@ module.exports = {
   },
   async addReaction(req, res) {
     try {
-      const dbThoughtData = await Thought.findOne({
+      const dbThoughtData = await Thought.findOneAndUpdate({
         _id: req.params.thoughtId,
-      });
+      },
+        { $addToSet: { reactions: req.body } },
+        {
+          runValidators: true,
+          new: true
+        }
+      );
       if (!dbThoughtData) {
         return res.status(404).json({ message: "Thought ID does not exist" });
       }
-      const dbUserData = await User.findOne({
-        _id: dbThoughtData.username,
-      });
 
-      dbThoughtData.reactions.push(req.body);
-      await dbThoughtData.save();
       res.json(dbThoughtData);
     } catch (err) {
       console.error(err);
